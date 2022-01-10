@@ -1,0 +1,10 @@
+<h3>{{ title }}</h3>
+<mat-dialog-content>
+	<pre>{{ content }}</pre>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+	<button mat-button mat-dialog-close>Cancel</button>
+	<button mat-button [mat-dialog-close]="true" cdkFocusInitial>
+		Validate
+	</button>
+</mat-dialog-actions>

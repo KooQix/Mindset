@@ -1,0 +1,31 @@
+
+### Get all channels
+GET http://localhost:3000/api/channels
+
+
+### Add channel
+POST http://localhost:3000/api/channel
+Content-Type: application/json
+
+{
+	"channelName": "Test"
+}
+
+
+### Delete channel
+DELETE http://localhost:3000/api/channel
+Content-Type: application/json
+
+{
+	"channelName": "Motivation2Study"
+}
+
+
+
+### Get randoms videos for a given time period
+GET http://localhost:3000/api/videos/600
+
+
+### Stream a video (audio)
+GET http://localhost:3000/api/stream/5
+

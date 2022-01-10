@@ -1,0 +1,81 @@
+<button class="goBack" (click)="goBack()" title="Go back">
+	<mat-icon
+		><span class="material-icons-outlined"> arrow_back </span></mat-icon
+	>
+</button>
+
+<div class="container">
+	<div class="logo">
+		<mat-icon>music_note</mat-icon>
+		<div>Audio Player</div>
+	</div>
+
+	<div class="content">
+		<mat-list>
+			<h3>Songs</h3>
+			<mat-list-item
+				*ngFor="let file of files; let i = index"
+				(click)="openFile(file, file.id)"
+			>
+				<mat-icon mat-list-icon>music_note</mat-icon>
+				<h4 mat-line>{{ file.title }}</h4>
+				<h5 mat-line>by {{ file.channel }}</h5>
+				<mat-icon
+					class="vol"
+					*ngIf="currentFile === file && !state?.error"
+					>volume_up</mat-icon
+				>
+				<h6 *ngIf="currentFile === file && state?.error">ERROR</h6>
+				<mat-divider></mat-divider>
+			</mat-list-item>
+		</mat-list>
+	</div>
+	<div class="media-footer">
+		<mat-toolbar>
+			<mat-toolbar-row>
+				{{ state?.readableCurrentTime }}
+				<mat-slider
+					class="time-slider"
+					min="0"
+					[max]="state?.duration"
+					step="1"
+					[value]="state?.currentTime"
+					(input)="onSliderChangeEnd($event)"
+					[disabled]="state?.error || currentFile === undefined"
+				></mat-slider>
+				{{ state?.readableDuration }}
+			</mat-toolbar-row>
+			<mat-toolbar-row class="info">
+				<p>{{ currentFile.channel }}&nbsp; : :&nbsp;</p>
+				<p>&nbsp; {{ currentFile.title }}</p>
+			</mat-toolbar-row>
+			<mat-toolbar-row class="media-action-bar">
+				<button
+					mat-button
+					[disabled]="isFirstPlaying()"
+					(click)="previous()"
+				>
+					<mat-icon mat-list-icon>skip_previous</mat-icon>
+				</button>
+				<button
+					mat-button
+					(click)="play()"
+					[disabled]="state?.error"
+					*ngIf="!state?.playing"
+				>
+					<mat-icon mat-list-icon>play_circle_filled</mat-icon>
+				</button>
+				<button mat-button (click)="pause()" *ngIf="state?.playing">
+					<mat-icon mat-list-icon>pause</mat-icon>
+				</button>
+				<button
+					mat-button
+					[disabled]="isLastPlaying()"
+					(click)="next()"
+				>
+					<mat-icon mat-list-icon>skip_next</mat-icon>
+				</button>
+			</mat-toolbar-row>
+		</mat-toolbar>
+	</div>
+</div>

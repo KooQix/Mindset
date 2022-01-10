@@ -1,0 +1,32 @@
+<div class="timer">
+	<h3>Start Audio</h3>
+	<span class="c">
+		<button class="morning" (click)="getVideos(960)">Morning</button>
+		<button class="5min" (click)="getVideos(300)">5 min</button>
+		<button class="10min" (click)="getVideos(600)">10 min</button>
+	</span>
+
+	<div class="slider">
+		<mat-slider
+			step="1"
+			min="5"
+			max="200"
+			aria-label="min"
+			[(ngModel)]="sliderValue"
+		></mat-slider>
+		<p class="sliderValue">{{ sliderValue }} min</p>
+		<button class="start" (click)="getVideos(sliderValue)">Start</button>
+	</div>
+</div>
+
+<div class="channel">
+	<h3>Add channel</h3>
+	<span class="form">
+		<input type="text" [(ngModel)]="channelToAdd" />
+		<button class="add-channel" (click)="addChannel()">Add</button>
+	</span>
+
+	<span class="b">
+		<button class="channels" (click)="goToChannels()">Channels</button>
+	</span>
+</div>

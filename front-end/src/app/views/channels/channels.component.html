@@ -1,0 +1,28 @@
+<button class="goBack" (click)="goBack()" title="Go back">
+	<mat-icon
+		><span class="material-icons-outlined"> arrow_back </span></mat-icon
+	>
+</button>
+
+<div class="logo">
+	<div>Channels</div>
+	<p>Total: {{ channels.length }}</p>
+</div>
+
+<div class="content">
+	<mat-list>
+		<mat-list-item *ngFor="let channel of channels; let i = index">
+			<span class="element">
+				<h4 mat-line>{{ channel.name }}</h4>
+				<h5 mat-line>{{ channel.nbVideos }} videos</h5>
+				<button
+					class="remove"
+					title="Remove channel"
+					(click)="openDialog(channel.name)"
+				>
+					X
+				</button>
+			</span>
+		</mat-list-item>
+	</mat-list>
+</div>
