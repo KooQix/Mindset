@@ -48,7 +48,7 @@ async function deleteVideo(id) {
 
 module.exports = {
 	/**
-	 * Scrap videos for new videos (every 48h). If nisNew, load the whole page of videos before scrapping (chen a channel is added). Otherwise, solely checks the newest videos
+	 * Scrap videos for new videos (every 48h). If isNew, load the whole page of videos before scrapping (then a channel is added). Otherwise, solely checks the newest videos
 	 *
 	 * @param {*} channelName
 	 * @param {*} isNew

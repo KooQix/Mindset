@@ -2,17 +2,6 @@ const puppeteer = require("puppeteer");
 const pool = require("./db/db");
 const { exec } = require("child_process");
 
-/**
- * Programs takes at least one parameter: the channel name (from the database)
- * If Second parameter, the program will load the entire page before scrapping (when adding a new Channel do the database)
- * 
- * [
-  '/opt/homebrew/Cellar/node/17.2.0/bin/node',
-  '/Users/kooqix/Documents/Informatique/Codage/Web/Projects/Mindset/back-end/scrapping/main.js',
-  'Motivation2Study'
-]
- */
-
 async function deleteVideo(id) {
 	exec(`rm -f ../downloads/${id}*`, (err, stdout, stderr) => {
 		if (err) {
