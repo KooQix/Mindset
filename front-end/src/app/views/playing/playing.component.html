@@ -12,10 +12,10 @@
 
 	<div class="content">
 		<mat-list>
-			<h3>Songs</h3>
+			<h3>Podcasts</h3>
 			<mat-list-item
 				*ngFor="let file of files; let i = index"
-				(click)="openFile(file, file.id)"
+				(click)="openFile(file, i)"
 			>
 				<mat-icon mat-list-icon>music_note</mat-icon>
 				<h4 mat-line>{{ file.title }}</h4>
@@ -46,8 +46,8 @@
 				{{ state?.readableDuration }}
 			</mat-toolbar-row>
 			<mat-toolbar-row class="info">
-				<p>{{ currentFile.channel }}&nbsp; : :&nbsp;</p>
-				<p>&nbsp; {{ currentFile.title }}</p>
+				<p class="channel">{{ currentFile.channel }}</p>
+				<p>{{ currentFile.title }}</p>
 			</mat-toolbar-row>
 			<mat-toolbar-row class="media-action-bar">
 				<button

@@ -98,7 +98,7 @@ export class PlayingService {
 	private streamObservable(url: string) {
 		return new Observable((observer) => {
 			// Play audio
-			this.audioObj.src = url;
+			this.audioObj.src = url + `?token=${localStorage.getItem("token")}`;
 			this.audioObj.load();
 			this.audioObj.play();
 
@@ -133,7 +133,7 @@ export class PlayingService {
 	}
 
 	playStream(id: number) {
-		const url = `${this.API_URL}/stream/${id}`;
+		const url = `${this.API_URL}/manage/stream/${id}`;
 		return this.streamObservable(url).pipe(takeUntil(this.stop$));
 	}
 

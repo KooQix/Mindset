@@ -10,12 +10,14 @@ export class ChannelsService {
 	constructor(private http: HttpClient) {}
 
 	getChannels() {
-		return this.http.get<any>(this.API_URL + "/channels").toPromise();
+		return this.http
+			.get<any>(this.API_URL + "/manage/channels")
+			.toPromise();
 	}
 
 	rmChannel(channelName: string) {
 		return this.http
-			.delete<any>(this.API_URL + "/channel", {
+			.delete<any>(this.API_URL + "/manage/channel", {
 				body: {
 					channelName: channelName,
 				},

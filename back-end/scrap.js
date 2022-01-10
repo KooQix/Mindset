@@ -14,7 +14,7 @@ const { exec } = require("child_process");
  */
 
 async function deleteVideo(id) {
-	exec(`rm -f ../download/${id}*`, (err, stdout, stderr) => {
+	exec(`rm -f ../downloads/${id}*`, (err, stdout, stderr) => {
 		if (err) {
 			console.log(err);
 			return;
@@ -37,7 +37,7 @@ async function downloadVideos(videos, channelName) {
 		setTimeout(() => {
 			const video_id = video.link.split("?");
 			exec(
-				`youtube-dl -ix --no-warnings --no-playlist --audio-format mp3 -o '${__dirname}/download/${
+				`youtube-dl -ix --no-warnings --no-playlist --audio-format mp3 -o '${__dirname}/downloads/${
 					video_id[video_id.length - 1]
 				}.mp3' ${video.link}`,
 				async (err, stdout, stderr) => {
@@ -70,11 +70,10 @@ async function downloadVideos(videos, channelName) {
 						const id = await pool.query(
 							`SELECT id FROM Videos WHERE link = '${video.link}'`,
 						);
-						console.log(id);
 						exec(
-							`mv ${__dirname}/download/${
+							`mv ${__dirname}/downloads/${
 								video_id[video_id.length - 1]
-							}.mp3 ${__dirname}/download/${id[0][0].id}.mp3`,
+							}.mp3 ${__dirname}/downloads/${id[0][0].id}.mp3`,
 						);
 					}, 300);
 				},

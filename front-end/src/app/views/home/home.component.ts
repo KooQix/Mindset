@@ -9,8 +9,9 @@ import { HomeService } from "./home.service";
 })
 export class HomeComponent implements OnInit {
 	constructor(private service: HomeService, private router: Router) {}
-	sliderValue = 100;
+	sliderValue: number = 100;
 	channelToAdd = "";
+	videoToAdd = "";
 
 	ngOnInit(): void {}
 

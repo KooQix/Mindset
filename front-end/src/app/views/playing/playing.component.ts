@@ -97,6 +97,7 @@ export class PlayingComponent implements OnInit {
 	}
 
 	goBack() {
+		this.stop();
 		this.audioService.resetFiles();
 		window.history.back();
 	}

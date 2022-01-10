@@ -13,7 +13,7 @@ export class HomeService {
 
 	addChannel(channel: string) {
 		return this.http
-			.post<any>(this.API_URL + "/channel", {
+			.post<any>(this.API_URL + "/manage/channel", {
 				channelName: channel,
 			})
 			.toPromise();
@@ -21,7 +21,7 @@ export class HomeService {
 
 	async getVideos(max_duration: number) {
 		const videos = await this.http
-			.get<any>(this.API_URL + "/videos/" + max_duration)
+			.get<any>(this.API_URL + "/manage/videos/" + max_duration)
 			.toPromise();
 		this.audioService.setFiles(videos);
 	}

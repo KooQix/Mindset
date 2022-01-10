@@ -3,6 +3,9 @@ const fs = require("fs");
 
 const model = require("../db/manage");
 
+const dotenv = require("dotenv");
+dotenv.config();
+
 //////////////////// Managing channels \\\\\\\\\\\\\\\\\\\\
 
 router.get("/channels", async (req, res) => {
@@ -50,7 +53,7 @@ router.get("/stream/:id", async (req, res) => {
 		if (!!!id) return;
 
 		// File has been downloaded, start stream
-		const name = `../download/${id}.mp3`;
+		const name = `../downloads/${id}.mp3`;
 
 		res.set("content-type", "audio/mp3");
 		res.set("accept-ranges", "bytes");

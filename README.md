@@ -1,10 +1,13 @@
 # Description
 
-    Youtube is an amazing source of information, however, watching requires a lot of attention. 
-    To be able to simply listen to the channels I love, I created a podcasts Web App using ExpressJS and Angular. 
-    When adding a new channel to my list, it scraps and downloads the videos on the given channel. 
+    Youtube is an amazing source of information, however, watching requires a lot of attention.
+    To be able to simply listen to the channels I love, I created a podcasts Web App using ExpressJS and Angular.
+    When adding a new channel to my list, it scraps and downloads the videos from the given channel.
     Then, the web app enables to select a duration. The app selects random podcasts from the list of downloaded for a total duration of duration.
-    Then, it starts playing every podcast.
+    Then, it starts playing each selected podcast.
+
+    Personal use, so not perfect but works fine for me.
+    Feel free to add features
 
 ## Preparation
 
@@ -40,8 +43,7 @@
 
     npm install
 
-
-## Start 
+## Start
 
 ### Back-end
 
@@ -50,5 +52,3 @@
 ### Front-end
 
     ng serve
-
-
