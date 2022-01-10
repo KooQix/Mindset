@@ -1,14 +1,18 @@
 # Description
 
-    description
+    Youtube is an amazing source of information, however, watching requires a lot of attention. 
+    To be able to simply listen to the channels I love, I created a podcasts Web App using ExpressJS and Angular. 
+    When adding a new channel to my list, it scraps and downloads the videos on the given channel. 
+    Then, the web app enables to select a duration. The app selects random podcasts from the list of downloaded for a total duration of duration.
+    Then, it starts playing every podcast.
 
 ## Preparation
 
 ### Back-end
 
-#### Create tmp folder:
+#### Create downloads folder:
 
-    mkdir tmp
+    mkdir downloads
 
 #### Create database (inside mysql)
 
@@ -18,6 +22,33 @@
 
     rename .env-example to .env and change variables values as needed
 
-#### Install youtube-dl
+#### Install dependencies
 
     sudo pip3 install youtube-dl
+
+    npm install
+
+### Front-end
+
+#### Create the environment variables
+
+    rename src/environments/environment-example.prod.ts to src/environments/environment.prod.ts
+    rename src/environments/environment-example.ts to src/environments/environment.ts
+    Configure as needed
+
+#### Install dependencies
+
+    npm install
+
+
+## Start 
+
+### Back-end
+
+    node main.js
+
+### Front-end
+
+    ng serve
+
+
