@@ -28,7 +28,7 @@ async function getVideosID(channelName) {
 	return id;
 }
 async function deleteVideo(id) {
-	exec(`rm -f ../download/${id}*`, (err, stdout, stderr) => {
+	exec(`rm -f ${__dirname}/../downloads/${id}*`, (err, stdout, stderr) => {
 		if (err) {
 			console.log(err);
 			return;
