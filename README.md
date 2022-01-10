@@ -13,17 +13,19 @@
 
 ### Back-end
 
+    cd back-end
+
 #### Create downloads folder:
 
     mkdir downloads
 
 #### Create database (inside mysql)
 
-    source /path/to/project/db/genDB.sql;
+    source /path/to/project/back-end/db/genDB.sql;
 
 #### Configure environment variables
 
-    rename .env-example to .env and change variables values as needed
+    rename .env-example to .env and change variables as needed
 
 #### Install dependencies
 
@@ -32,6 +34,8 @@
     npm install
 
 ### Front-end
+
+    cd front-end
 
 #### Create the environment variables
 
@@ -46,9 +50,10 @@
 ## Start
 
 ### Back-end
-
-    node main.js
+	
+    node back-end/main.js
 
 ### Front-end
 
+    cd front-end
     ng serve
