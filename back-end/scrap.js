@@ -21,8 +21,32 @@ async function deleteVideo(id) {
 	}
 }
 
+
+function split_array(array, index) {
+	if (array.length < index) return [array, []];
+	let arr = [[], []];
+	for (let i = 0; i < index; i++) {
+		arr[0].push(array[i]);
+	}
+	arr[1] = array.splice(index);
+	return arr;
+}
+
 async function downloadVideos(videos, channelName) {
-	for (const video of videos) {
+	let v;
+
+	// Split download into parts, every 7 min
+	if (videos.length > 30) {
+		const array = split_array(videos, 30);
+		v = array[0];
+
+		setTimeout(() => {
+			downloadVideos(array[1], channelName);
+		}, 7 * 60 * 1000);
+	}
+	else v = videos;
+
+	for (const video of v) {
 		setTimeout(() => {
 			const video_id = video.link.split("?");
 			exec(
@@ -67,19 +91,22 @@ async function downloadVideos(videos, channelName) {
 					}, 300);
 				},
 			);
-		}, 1000);
+		}, 5000);
 	}
 }
 
 async function scrap(channelName, isNew) {
-	const browser = await puppeteer.launch({ headless: true }); //false => open a browser window, true: do it under the hood
+	// const browser = await puppeteer.launch({ headless: true, executablePath: '/usr/bin/chromium-browser', args: [ "--disable-gpu", "--disable-dev-shm-usage", "--disable-setuid-sandbox", "--no-sandbox" ]}); //false => open a browser window, true: do it under the hood
+	const browser = await puppeteer.launch({ headless: true}); //false => open a browser window, true: do it under the hood
 	const page = await browser.newPage();
-	await page.goto(`https://www.youtube.com/c/${channelName}/videos`);
+	await page.goto(`https://www.youtube.com/c/${channelName}/videos`, { waitUntil: 'networkidle0' });
 
 	// Accept cookies
 	let consent =
 		".qqtRac > form:nth-child(2) > div:nth-child(1) > div:nth-child(1) > button:nth-child(1)";
 	await page.click(consent);
+
+	await page.waitForNavigation({ waitUntil: 'networkidle0' });
 
 	//////////////////// Scrapping starts here \\\\\\\\\\\\\\\\\\\\
 
@@ -88,7 +115,7 @@ async function scrap(channelName, isNew) {
 
 		if (isNew) {
 			await scrollToBottom(page);
-			await page.waitForTimeout(10000);
+			await page.waitForTimeout(50000);
 
 			async function scrollToBottom(pageToScroll) {
 				const distance = 100; // should be less than or equal to window.innerHeight
@@ -136,6 +163,7 @@ async function scrap(channelName, isNew) {
 			return videos;
 		});
 		await browser.close();
+		console.log(videos.length);
 
 		// Download videos and add them to the database when they are available
 		downloadVideos(videos, channelName);
