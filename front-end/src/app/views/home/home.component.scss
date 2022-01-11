@@ -42,7 +42,7 @@ h3 {
 }
 
 mat-slider {
-	width: 60%;
+	width: 55%;
 }
 
 .slider {
@@ -50,9 +50,19 @@ mat-slider {
 	justify-content: space-between;
 	align-items: center;
 
-	.start {
-		padding-top: 0.5em;
-		padding-bottom: 0.5em;
+	span {
+		display: flex;
+		align-items: center;
+		justify-content: space-between !important;
+		width: 40%;
+
+		.start {
+			margin-left: 1.2em;
+			padding-left: 2.5em;
+			padding-right: 2.5em;
+			padding-top: 1em;
+			padding-bottom: 1em;
+		}
 	}
 }
 .sliderValue {
@@ -131,4 +141,19 @@ mat-slider {
 	}
 
 	padding-bottom: 5em;
+}
+
+@media (max-width: 1250px) {
+	.channel {
+		span {
+			padding-left: 0;
+			width: 80%;
+		}
+	}
+}
+
+@media (max-width: 1100px) {
+	.slider {
+		flex-direction: column;
+	}
 }

@@ -20,13 +20,13 @@ $front-end-warn: mat.define-palette(mat.$red-palette);
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
 $front-end-theme: mat.define-light-theme(
-  (
-    color: (
-      primary: $front-end-primary,
-      accent: $front-end-accent,
-      warn: $front-end-warn,
-    ),
-  )
+	(
+		color: (
+			primary: $front-end-primary,
+			accent: $front-end-accent,
+			warn: $front-end-warn,
+		),
+	)
 );
 
 // Include theme styles for core and each component used in your app.
@@ -37,15 +37,41 @@ $front-end-theme: mat.define-light-theme(
 /* You can add global styles to this file, and also import other style files */
 
 body {
-  background: black;
+	background: black;
+
+	// display: flex;
+	// align-items: center;
+	// justify-content: center;
+	// flex-direction: column;
 }
 
 html,
 body {
-  height: 100%;
-  width: 100;
-  padding-left: 10em;
-  padding-right: 10em;
+	height: 100%;
+	width: 100;
+	padding-left: 10em;
+	padding-right: 10em;
 }
 
 // body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@media screen and (max-width: 650px) {
+	html {
+		padding: 0;
+		margin: 0;
+	}
+}
+
+@media screen and (max-width: 880px) {
+	body {
+		padding: 0;
+	}
+}
+
+app-auth {
+	left: 0;
+	display: flex;
+	align-items: center;
+	justify-content: start;
+	flex-direction: column;
+}

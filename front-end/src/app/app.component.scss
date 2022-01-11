@@ -3,12 +3,12 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	width: 100%;
 }
 
 .container {
 	margin-top: 5em;
-	padding-left: 5em;
-	padding-right: 5em;
+	width: 100%;
 }
 
 h1 {
@@ -51,3 +51,5 @@ h1::before {
 ::ng-deep button:hover {
 	transform: scale(1.2);
 }
+
+// @media (min-width: 768px);

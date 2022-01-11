@@ -13,9 +13,11 @@ h3 {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	flex-direction: column;
 	padding-top: 5em;
 	padding-left: 18em;
 	padding-right: 18em;
+	width: 50%;
 
 	input {
 		color: white;
@@ -30,5 +32,35 @@ h3 {
 	button {
 		padding-top: 0.7em;
 		padding-bottom: 0.7em;
+	}
+}
+
+//////////////////// Small screens \\\\\\\\\\\\\\\\\\\\
+
+@media (max-width: 12550px) {
+	h3 {
+		width: 100%;
+	}
+
+	.container {
+		padding-left: 0;
+		padding-right: 0;
+		width: 100%;
+
+		button {
+			margin-top: 2em;
+		}
+
+		input {
+			padding-left: 0;
+			padding-right: 0;
+			width: 70%;
+		}
+	}
+}
+
+@media (min-width: 1255px) {
+	.container {
+		width: 60%;
 	}
 }

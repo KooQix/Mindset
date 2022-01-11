@@ -14,10 +14,13 @@
 			aria-label="min"
 			[(ngModel)]="sliderValue"
 		></mat-slider>
-		<p class="sliderValue">{{ sliderValue }} min</p>
-		<button class="start" (click)="getVideos(sliderValue * 60)">
-			Start
-		</button>
+
+		<span>
+			<p class="sliderValue">{{ sliderValue }} min</p>
+			<button class="start" (click)="getVideos(sliderValue * 60)">
+				Start
+			</button>
+		</span>
 	</div>
 </div>
 
@@ -25,7 +28,9 @@
 	<h3>Add channel</h3>
 	<span class="form">
 		<input type="text" [(ngModel)]="channelToAdd" />
-		<button class="add-channel" (click)="addChannel()">Add</button>
+		<button class="add-channel" type="submit" (click)="addChannel()">
+			Add
+		</button>
 	</span>
 
 	<span class="b">
