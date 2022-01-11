@@ -163,7 +163,6 @@ async function scrap(channelName, isNew) {
 			return videos;
 		});
 		await browser.close();
-		console.log(videos.length);
 
 		// Download videos and add them to the database when they are available
 		downloadVideos(videos, channelName);
