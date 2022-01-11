@@ -62,3 +62,4 @@ temp/
 **/download/**
 **/downloads/**
 
+.DS_Store
