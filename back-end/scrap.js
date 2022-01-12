@@ -21,7 +21,6 @@ async function deleteVideo(id) {
 	}
 }
 
-
 function split_array(array, index) {
 	if (array.length < index) return [array, []];
 	let arr = [[], []];
@@ -43,8 +42,7 @@ async function downloadVideos(videos, channelName) {
 		setTimeout(() => {
 			downloadVideos(array[1], channelName);
 		}, 7 * 60 * 1000);
-	}
-	else v = videos;
+	} else v = videos;
 
 	for (const video of v) {
 		setTimeout(() => {
@@ -97,16 +95,18 @@ async function downloadVideos(videos, channelName) {
 
 async function scrap(channelName, isNew) {
 	// const browser = await puppeteer.launch({ headless: true, executablePath: '/usr/bin/chromium-browser', args: [ "--disable-gpu", "--disable-dev-shm-usage", "--disable-setuid-sandbox", "--no-sandbox" ]}); //false => open a browser window, true: do it under the hood
-	const browser = await puppeteer.launch({ headless: true}); //false => open a browser window, true: do it under the hood
+	const browser = await puppeteer.launch({ headless: true }); //false => open a browser window, true: do it under the hood
 	const page = await browser.newPage();
-	await page.goto(`https://www.youtube.com/c/${channelName}/videos`, { waitUntil: 'networkidle0' });
+	await page.goto(`https://www.youtube.com/c/${channelName}/videos`, {
+		waitUntil: "networkidle0",
+	});
 
 	// Accept cookies
 	let consent =
 		".qqtRac > form:nth-child(2) > div:nth-child(1) > div:nth-child(1) > button:nth-child(1)";
 	await page.click(consent);
 
-	await page.waitForNavigation({ waitUntil: 'networkidle0' });
+	await page.waitForNavigation({ waitUntil: "networkidle0" });
 
 	//////////////////// Scrapping starts here \\\\\\\\\\\\\\\\\\\\
 

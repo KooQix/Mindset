@@ -3,8 +3,6 @@ import { StreamState } from "src/interfaces/stream-state";
 import { AudioService } from "./audio.service";
 import { PlayingService } from "./playing.service";
 import { File } from "src/interfaces/file";
-import { exec } from "child_process";
-import { stderr } from "process";
 
 @Component({
 	selector: "app-playing",
@@ -98,15 +96,5 @@ export class PlayingComponent implements OnInit {
 		this.stop();
 		this.audioService.resetFiles();
 		window.history.back();
-
-		exec("rm -f ../../assets/downloads/*", (error, stdout, stderr) => {
-			if (error) {
-				console.log(error);
-				return;
-			}
-			if (stderr) {
-				console.log(stderr);
-			}
-		});
 	}
 }

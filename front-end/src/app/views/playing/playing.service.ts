@@ -101,9 +101,6 @@ export class PlayingService {
 			// Play audio
 			this.audioObj.src = url + `?token=${localStorage.getItem("token")}`;
 
-			// Stream fails on iPhone and I need to be able to play from iPhone to I came up with this...
-			this.audioObj.src = `../../assets/downloads/${id}.mp3`;
-
 			this.audioObj.load();
 			this.audioObj.play();
 
