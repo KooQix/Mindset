@@ -61,7 +61,7 @@ router.get("/stream/:id", async (req, res) => {
 		const parts = range.replace(/bytes=/, "").split("-");
 		const partialStart = parts[0];
 		const partialEnd = parts[1];
-
+                
 		const start = parseInt(partialStart, 10);
 		const end = partialEnd ? parseInt(partialEnd, 10) : total - 1;
 		const chunksize = end - start + 1;
@@ -74,7 +74,7 @@ router.get("/stream/:id", async (req, res) => {
 			"Content-Range": "bytes " + start + "-" + end + "/" + total,
 			"Accept-Ranges": "bytes",
 			"Content-Length": chunksize,
-			"Content-Type": "audio/mp3",
+			"Content-Type": "audio/mpeg; charset=UTF-8",
 		});
 
 		musicStream.pipe(res);
