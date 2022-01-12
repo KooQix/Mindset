@@ -132,4 +132,22 @@ module.exports = {
 		}
 		return videos;
 	},
+
+	async cp(id) {
+		exec(
+			`docker cp ${__dirname}/../../downloads/${id}.mp3 ${process.env.FRONT_DOCKER_CONTAINER}:${id}.mp3`,
+			(error, stdout, stderr) => {
+				if (error) {
+					console.log(error);
+					return;
+				}
+
+				if (stderr) {
+					console.log(stderr);
+					return;
+				}
+				console.log(stdout);
+			},
+		);
+	},
 };

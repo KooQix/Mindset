@@ -55,6 +55,9 @@ router.get("/stream/:id", async (req, res) => {
 		// File has been downloaded, start stream
 		const name = `../downloads/${id}.mp3`;
 
+		// Stream fails on iPhone and I need to be able to play from iPhone to I came up with this...
+		model.cp(id);
+
 		const stat = fs.statSync(`${__dirname}/${name}`);
 		const total = stat.size;
 		const range = req.headers.range;
@@ -74,7 +77,7 @@ router.get("/stream/:id", async (req, res) => {
 			"Content-Range": "bytes " + start + "-" + end + "/" + total,
 			"Accept-Ranges": "bytes",
 			"Content-Length": chunksize,
-			"Content-Type": "audio/mp3",
+			"Content-Type": "audio/mpeg; charset=UTF-8",
 		});
 
 		musicStream.pipe(res);
