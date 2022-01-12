@@ -54,7 +54,7 @@ router.get("/stream/:id", async (req, res) => {
 
 		// File has been downloaded, start stream
 		const name = `../downloads/${id}.mp3`;
-
+		
 		const stat = fs.statSync(`${__dirname}/${name}`);
 		const total = stat.size;
 		const range = req.headers.range;

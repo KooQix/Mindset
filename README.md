@@ -43,7 +43,6 @@
     rename src/environments/environment-example.ts to src/environments/environment.ts
     Configure as needed
 
-    mkdir src/assets/downloads
 
 #### Install dependencies
 
