@@ -35,6 +35,7 @@ async function downloadVideos(videos, channelName) {
 	let v;
 
 	// Split download into parts, every 7 min
+	// This is not required but the server runs on a raspberry pi, so don't want to overheat it
 	if (videos.length > 30) {
 		const array = split_array(videos, 30);
 		v = array[0];
