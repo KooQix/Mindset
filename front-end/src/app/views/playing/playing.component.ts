@@ -24,7 +24,6 @@ export class PlayingComponent implements OnInit {
 			this.files = files;
 			this.currentFile = this.files[0];
 		});
-
 		// listen to stream state
 		this.service.getState().subscribe((state) => {
 			this.state = state;
@@ -44,6 +43,7 @@ export class PlayingComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		this.currentFile = this.files[0];
 		this.openFile(0);
 	}
 

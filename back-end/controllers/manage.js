@@ -55,11 +55,27 @@ router.get("/stream/:id", async (req, res) => {
 		// File has been downloaded, start stream
 		const name = `../downloads/${id}.mp3`;
 
-		res.set("content-type", "audio/mp3");
-		res.set("accept-ranges", "bytes");
+		const stat = fs.statSync(`${__dirname}/${name}`);
+		const total = stat.size;
+		const range = req.headers.range;
+		const parts = range.replace(/bytes=/, "").split("-");
+		const partialStart = parts[0];
+		const partialEnd = parts[1];
 
-		let musicStream;
-		musicStream = fs.createReadStream(`${__dirname}/${name}`);
+		const start = parseInt(partialStart, 10);
+		const end = partialEnd ? parseInt(partialEnd, 10) : total - 1;
+		const chunksize = end - start + 1;
+
+		const musicStream = fs.createReadStream(`${__dirname}/${name}`, {
+			start: start,
+			end: end,
+		});
+		res.writeHead(206, {
+			"Content-Range": "bytes " + start + "-" + end + "/" + total,
+			"Accept-Ranges": "bytes",
+			"Content-Length": chunksize,
+			"Content-Type": "audio/mp3",
+		});
 
 		musicStream.pipe(res);
 	} catch (error) {

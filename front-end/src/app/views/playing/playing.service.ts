@@ -7,8 +7,6 @@ import { StreamState } from "src/interfaces/stream-state";
 import { environment as env } from "src/environments/environment";
 import { HttpClient } from "@angular/common/http";
 
-import { File } from "src/interfaces/file";
-
 @Injectable({
 	providedIn: "root",
 })
@@ -17,7 +15,6 @@ export class PlayingService {
 
 	private stop$ = new Subject();
 	private audioObj = new Audio();
-	private audioElement = document.querySelector("audio");
 
 	audioEvents = [
 		"ended",
@@ -102,14 +99,9 @@ export class PlayingService {
 	private streamObservable(url: string) {
 		return new Observable((observer) => {
 			// Play audio
-			const e = document.querySelector("audio");
-			if (e) this.audioElement = e;
-			if (this.audioElement) {
-				this.audioElement.src =
-					url + `?token=${localStorage.getItem("token")}`;
-				this.audioElement.play();
-				this.audioObj = this.audioElement;
-			}
+			this.audioObj.src = url + `?token=${localStorage.getItem("token")}`;
+			this.audioObj.load();
+			this.audioObj.play();
 
 			const handler = (event: Event) => {
 				this.updateStateEvents(event);
