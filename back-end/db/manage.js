@@ -17,9 +17,9 @@ setInterval(async () => {
 }, 48 * 60 * 60 * 1000);
 
 async function getVideosID(channelName) {
-	const res = await pool.query(
-		`SELECT id FROM Videos WHERE channel = '${channelName}'`,
-	);
+	const res = await pool.query("SELECT id FROM Videos WHERE channel = ?", [
+		channelName,
+	]);
 
 	let id = [];
 	for (const i of res[0]) {
@@ -39,7 +39,7 @@ async function deleteVideo(id) {
 		}
 	});
 	try {
-		await pool.query(`DELETE FROM Videos WHERE id = ${id}`);
+		await pool.query(`DELETE FROM Videos WHERE id = ?`, [id]);
 		await pool.query("COMMIT");
 	} catch (error) {
 		// Video hasn't been added to the database so not removed
@@ -65,15 +65,15 @@ module.exports = {
 
 	async addChannel(channelName) {
 		// Check if already exist
-		const res = await pool.query(
-			`SELECT * FROM Channels WHERE name='${channelName}'`,
-		);
+		const res = await pool.query(`SELECT * FROM Channels WHERE name = ?`, [
+			channelName,
+		]);
 		if (res[0].length > 0) return { error: "Already exist" };
 
 		// Channel doesn't exist, add it
-		await pool.query(
-			`INSERT INTO Channels (name) VALUES ("${channelName}")`,
-		);
+		await pool.query(`INSERT INTO Channels (name) VALUES (?)`, [
+			channelName,
+		]);
 		await pool.query("COMMIT");
 		this.scrapVideos(channelName, true);
 		return { message: "OK" };
@@ -85,7 +85,8 @@ module.exports = {
 		let channels = [];
 		for (let c of res[0]) {
 			const nbVideos = await pool.query(
-				`SELECT COUNT(id) as nb FROM Videos WHERE channel = '${c.name}'`,
+				`SELECT COUNT(id) as nb FROM Videos WHERE channel = ?`,
+				[c.name],
 			);
 			channels.push({
 				name: c.name,
@@ -97,7 +98,7 @@ module.exports = {
 
 	async rmChannel(channelName) {
 		// Delete channel
-		await pool.query(`DELETE FROM Channels WHERE name = '${channelName}'`);
+		await pool.query(`DELETE FROM Channels WHERE name = ?`, [channelName]);
 		await pool.query("COMMIT");
 
 		// Delete videos from that channel
@@ -111,7 +112,8 @@ module.exports = {
 
 	async getRandomVideo(maxDuration) {
 		const res = await pool.query(
-			`SELECT * FROM Videos WHERE duration <= ${maxDuration}`,
+			`SELECT * FROM Videos WHERE duration <= ?`,
+			[maxDuration],
 		);
 
 		// 0 -> res[0].length - 1
