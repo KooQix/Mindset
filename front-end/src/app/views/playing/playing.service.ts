@@ -96,10 +96,14 @@ export class PlayingService {
 
 	//////////////////// Managing audio \\\\\\\\\\\\\\\\\\\\
 
-	private streamObservable(url: string) {
+	private streamObservable(url: string, id: number) {
 		return new Observable((observer) => {
 			// Play audio
 			this.audioObj.src = url + `?token=${localStorage.getItem("token")}`;
+
+			// Stream fails on iPhone and I need to be able to play from iPhone to I came up with this...
+			this.audioObj.src = `../../assets/downloads/${id}.mp3`;
+
 			this.audioObj.load();
 			this.audioObj.play();
 
@@ -134,7 +138,7 @@ export class PlayingService {
 
 	playStream(id: number) {
 		const url = `${this.API_URL}/manage/stream/${id}`;
-		return this.streamObservable(url).pipe(takeUntil(this.stop$));
+		return this.streamObservable(url, id).pipe(takeUntil(this.stop$));
 	}
 
 	// Play, stop ...
