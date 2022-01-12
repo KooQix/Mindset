@@ -11,7 +11,6 @@ import { File } from "src/interfaces/file";
 })
 export class PlayingComponent implements OnInit {
 	files: File[] = [];
-	read_files: File[] = [];
 
 	state: StreamState;
 	currentFile: File;
@@ -24,9 +23,6 @@ export class PlayingComponent implements OnInit {
 		this.audioService.getFiles().subscribe((files) => {
 			this.files = files;
 			this.currentFile = this.files[0];
-			setTimeout(() => {
-				this.openFile(this.files[0], 0);
-			}, 3000);
 		});
 
 		// listen to stream state
@@ -36,31 +32,31 @@ export class PlayingComponent implements OnInit {
 				this.currentFile.duration,
 			);
 			this.state.duration = this.currentFile.duration;
-
 			if (
 				!!state.readableCurrentTime &&
 				!!state.readableDuration &&
 				state.readableCurrentTime === state.readableDuration
 			) {
-				this.read_files.push(this.currentFile);
 				this.next();
 				this.play();
 			}
 		});
 	}
 
-	ngOnInit() {}
+	ngOnInit() {
+		this.openFile(0);
+	}
+
+	openFile(index: number) {
+		this.currentFile = this.files[index];
+		this.service.stop();
+		this.playStream(this.files[index].id);
+	}
 
 	playStream(id: number) {
 		this.service.playStream(id).subscribe((events) => {
 			// listening for fun here
 		});
-	}
-
-	openFile(file: File, index: number) {
-		this.currentFile = this.files[index];
-		this.service.stop();
-		this.playStream(file.id);
 	}
 
 	pause() {
@@ -75,13 +71,13 @@ export class PlayingComponent implements OnInit {
 
 	next() {
 		const index = this.files.indexOf(this.currentFile) + 1;
-		const file = this.files[index];
-		this.openFile(file, index);
+		this.currentFile = this.files[index];
+		this.openFile(index);
 	}
 	previous() {
 		const index = this.files.indexOf(this.currentFile) - 1;
-		const file = this.files[index];
-		this.openFile(file, index);
+		this.currentFile = this.files[index];
+		this.openFile(index);
 	}
 
 	isFirstPlaying() {

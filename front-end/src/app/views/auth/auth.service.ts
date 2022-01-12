@@ -11,6 +11,7 @@ export class AuthService {
 	constructor(private http: HttpClient) {}
 
 	async login(pass: string) {
+		console.log(env.API_URL);
 		return this.http
 			.post<{
 				error?: string;

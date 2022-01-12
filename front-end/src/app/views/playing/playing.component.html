@@ -15,7 +15,7 @@
 			<h3>Podcasts</h3>
 			<mat-list-item
 				*ngFor="let file of files; let i = index"
-				(click)="openFile(file, i)"
+				(click)="openFile(i)"
 			>
 				<mat-icon mat-list-icon>music_note</mat-icon>
 				<h4 mat-line>{{ file.title }}</h4>
@@ -78,4 +78,5 @@
 			</mat-toolbar-row>
 		</mat-toolbar>
 	</div>
+	<audio type="audio/mp3" controls></audio>
 </div>

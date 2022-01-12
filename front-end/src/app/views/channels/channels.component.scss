@@ -54,6 +54,18 @@
 					font-size: 1.2em;
 					margin-top: 0;
 				}
+
+				.info {
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+					flex-direction: row;
+
+					button {
+						padding-top: 0;
+						padding-bottom: 0;
+					}
+				}
 			}
 
 			h4 {
@@ -64,6 +76,14 @@
 			h5 {
 				color: white;
 			}
+		}
+	}
+}
+
+@media (max-width: 1350px) {
+	.content {
+		.element {
+			flex-direction: column;
 		}
 	}
 }

@@ -14,14 +14,16 @@
 		<mat-list-item *ngFor="let channel of channels; let i = index">
 			<span class="element">
 				<h4 mat-line>{{ channel.name }}</h4>
-				<h5 mat-line>{{ channel.nbVideos }} videos</h5>
-				<button
-					class="remove"
-					title="Remove channel"
-					(click)="openDialog(channel.name)"
-				>
-					X
-				</button>
+				<span class="info">
+					<h5 mat-line>{{ channel.nbVideos }} videos</h5>
+					<button
+						class="remove"
+						title="Remove channel"
+						(click)="openDialog(channel.name)"
+					>
+						X
+					</button>
+				</span>
 			</span>
 		</mat-list-item>
 	</mat-list>
