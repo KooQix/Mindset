@@ -67,19 +67,22 @@ async function downloadVideos(videos, channelName) {
 					// Video has been downloaded successfully, can add it to the database
 					// Add videos to the database
 					const res = await pool.query(
-						`SELECT * FROM Videos WHERE title = "${video.title}"`,
+						`SELECT * FROM Videos WHERE title = ?`,
+						[video.title],
 					);
 					if (res[0].length !== 0) return;
 
 					// Doesn't exist in database => add it
 					await pool.query(
-						`INSERT INTO Videos (link, title, duration, channel) VALUES ("${video.link}", "${video.title}", ${video.duration}, '${channelName}')`,
+						`INSERT INTO Videos (link, title, duration, channel) VALUES (?, ?, ?, ?)`,
+						[video.link, video.title, video.duration, channelName],
 					);
 					await pool.query("COMMIT");
 
 					setTimeout(async () => {
 						const id = await pool.query(
-							`SELECT id FROM Videos WHERE link = '${video.link}'`,
+							`SELECT id FROM Videos WHERE link = ?`,
+							[video.link],
 						);
 						exec(
 							`mv ${__dirname}/downloads/${
