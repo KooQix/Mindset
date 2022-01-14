@@ -28,7 +28,7 @@ export class PlayingComponent implements OnInit {
 		this.service.getState().subscribe((state) => {
 			this.state = state;
 			this.state.readableDuration = this.service.formatTime(
-				this.currentFile.duration,
+				this.currentFile.duration - 3,
 			);
 			this.state.duration = this.currentFile.duration;
 			if (
