@@ -10,9 +10,13 @@ function durationOK(duration, durationSelected) {
 
 // Regularly check added channels for new videos (every 48h)
 setInterval(async () => {
-	const channels = await this.getChannels();
-	for (let channel of channels) {
-		await this.scrapVideos(channel.name, false);
+	try {
+		const channels = await this.getChannels();
+		for (let channel of channels) {
+			await this.scrapVideos(channel.name, false);
+		}
+	} catch (error) {
+		console.log(`Error: ${error.message}`);
 	}
 }, 48 * 60 * 60 * 1000);
 
