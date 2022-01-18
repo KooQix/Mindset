@@ -14,7 +14,7 @@ router.post("/", async (req, res) => {
 				{ id: process.env.JWT_T },
 				process.env.JWT_SECRET,
 				{
-					expiresIn: "2 days",
+					expiresIn: "1 month",
 				},
 			);
 
