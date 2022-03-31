@@ -15,10 +15,14 @@ export class PlayingComponent implements OnInit {
 	state: StreamState;
 	currentFile: File;
 
+	start: boolean;
+
 	constructor(
 		public audioService: AudioService,
 		public service: PlayingService,
 	) {
+		this.start = false;
+
 		// get media files
 		this.audioService.getFiles().subscribe((files) => {
 			this.files = files;
@@ -42,15 +46,12 @@ export class PlayingComponent implements OnInit {
 		});
 	}
 
-	ngOnInit() {
-		this.currentFile = this.files[0];
-		this.openFile(0);
-	}
+	ngOnInit() {}
 
 	openFile(index: number) {
 		this.currentFile = this.files[index];
 		this.service.stop();
-		this.playStream(this.files[index].id);
+		this.playStream(this.currentFile.id);
 	}
 
 	playStream(id: number) {
@@ -63,6 +64,10 @@ export class PlayingComponent implements OnInit {
 		this.service.pause();
 	}
 	play() {
+		if (!!!this.start) {
+			this.openFile(0);
+			this.start = false;
+		}
 		this.service.play();
 	}
 	stop() {
