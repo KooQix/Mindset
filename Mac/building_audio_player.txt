@@ -1,0 +1,7 @@
+https://auth0.com/blog/building-an-audio-player-app-with-ionic-angular-rxjs-and-ngrx/
+
+
+https://developer.mozilla.org/en-US/docs/Web/Media/Autoplay_guide
+
+
+
