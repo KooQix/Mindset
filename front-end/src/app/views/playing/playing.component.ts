@@ -62,10 +62,6 @@ export class PlayingComponent implements OnInit {
 		this.service.pause();
 	}
 	play() {
-		// if (!!!this.start) {
-		// 	this.openFile(0);
-		// 	this.start = false;
-		// }
 		this.service.play();
 	}
 	stop() {
