@@ -45,8 +45,10 @@
 				></mat-slider>
 				{{ state?.readableDuration }}
 			</mat-toolbar-row>
-			<mat-toolbar-row class="info">
-				<p class="channel">{{ currentFile.channel }}</p>
+			<mat-toolbar-row class="info" *ngIf="!!currentFile">
+				<p class="channel">
+					{{ currentFile.channel }}
+				</p>
 				<p>{{ currentFile.title }}</p>
 			</mat-toolbar-row>
 			<mat-toolbar-row class="media-action-bar">
