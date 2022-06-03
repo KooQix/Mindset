@@ -62,7 +62,12 @@ export class PlayingComponent implements OnInit {
 		this.service.pause();
 	}
 	play() {
-		this.service.play();
+		try {
+			this.service.play();
+		} catch (error) {
+			this.next();
+			this.play();
+		}
 	}
 	stop() {
 		this.service.stop();
